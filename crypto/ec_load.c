@@ -16,7 +16,7 @@ EC_KEY *ec_load(char const *folder)
 		return (0);
 
 	/*Create the complete path to read the public key*/
-	sprintf(path, "%s/" PRIVATE_KEY_FILENAME, folder);
+	sprintf(path, "%s/" PRI_FILENAME, folder);
 	/*Open a file descriptor to read the public key*/
 	fp = fopen(path, "r");
 	if (!fp)
@@ -33,7 +33,7 @@ EC_KEY *ec_load(char const *folder)
 	}
 	fclose(fp);
 	/*Create the complete path to read the private key*/
-	sprintf(path, "%s/" PUB_KEY_FILENAME, folder);
+	sprintf(path, "%s/" PUB_FILENAME, folder);
 	/*Open a file descriptor to read the private key*/
 	fp = fopen(path, "r");
 	if (!fp)
