@@ -11,10 +11,14 @@
 
 #include <openssl/sha.h>
 #include "../../crypto/hblk_crypto.h"
+#include "provided/endianness.h"
 
 #include <time.h>
 
 #define BLOCKCHAIN_DATA_MAX 1024
+#define HBLK_MAGIC "HBLK"
+#define HBLK_VERSION "0.1"
+
 
 /**
 * struct blockchain_s - Blockchain structure
@@ -83,17 +87,39 @@ typedef struct block_s
 } block_t;
 
 
+/**
+* struct hblk_file_s - Block file format
+* @hblk_magic: magic bytes for HBLK
+* @hblk_version: blockchain version
+* @hblk_endian: endianness, 1 if big endian, 2 if little endian
+* @hblk_blocks: number of blocks in the file
+*/
+typedef struct hblk_file_s
+{
+	int8_t      hblk_magic[4];
+	int8_t      hblk_version[3];
+	int8_t      hblk_endian;
+	int32_t     hblk_blocks;
+} hblk_file_t;
+
+
 blockchain_t *blockchain_create(void);
 block_t *block_create(block_t const *prev,
+
 int8_t const *data, uint32_t data_len);
+
 void block_destroy(block_t *block);
 void blockchain_destroy(blockchain_t *blockchain);
 uint8_t *block_hash(block_t const *block,
+
 uint8_t hash_buf[SHA256_DIGEST_LENGTH]);
 int blockchain_serialize(blockchain_t const *blockchain, char const *path);
+
 blockchain_t *blockchain_deserialize(char const *path);
+
 int block_is_valid(block_t const *block, block_t const *prev_block);
 
 void _blockchain_destroy(blockchain_t *blockchain);
 void _blockchain_print(blockchain_t const *blockchain);
+
 #endif /* BLOCKCHAIN_H */
