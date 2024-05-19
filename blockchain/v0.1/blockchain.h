@@ -10,6 +10,7 @@
 #include <sys/types.h>
 
 #include <openssl/sha.h>
+#include "../../crypto/hblk_crypto.h"
 
 #include <time.h>
 
@@ -93,4 +94,6 @@ int blockchain_serialize(blockchain_t const *blockchain, char const *path);
 blockchain_t *blockchain_deserialize(char const *path);
 int block_is_valid(block_t const *block, block_t const *prev_block);
 
+void _blockchain_destroy(blockchain_t *blockchain);
+void _blockchain_print(blockchain_t const *blockchain);
 #endif /* BLOCKCHAIN_H */
