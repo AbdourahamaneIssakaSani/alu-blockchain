@@ -11,6 +11,8 @@
 
 #include <openssl/sha.h>
 
+#include <time.h>
+
 #define BLOCKCHAIN_DATA_MAX 1024
 
 /**
@@ -81,5 +83,7 @@ typedef struct block_s
 
 
 blockchain_t *blockchain_create(void);
+block_t *block_create(block_t const *prev,
+int8_t const *data, uint32_t data_len);
 
 #endif /* BLOCKCHAIN_H */
