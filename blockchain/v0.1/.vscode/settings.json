@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdint.h": "c",
+        "sha.h": "c",
+        "blockchain.h": "c"
+    }
+}
