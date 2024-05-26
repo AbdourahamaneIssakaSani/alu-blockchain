@@ -21,7 +21,8 @@ tx_in_t *tx_in_create(unspent_tx_out_t const *unspent)
 
 	memcpy(tx_in->block_hash, unspent->block_hash, sizeof(tx_in->block_hash));
 	memcpy(tx_in->tx_id, unspent->tx_id, sizeof(tx_in->tx_id));
-	memcpy(tx_in->tx_out_hash, &unspent->out, sizeof(tx_in->tx_out_hash));
+	memcpy(tx_in->tx_out_hash, unspent->out.hash, sizeof(tx_in->tx_out_hash));
+
 
 	return (tx_in);
 }
