@@ -12,6 +12,7 @@
 #include <openssl/sha.h>
 #include "../../crypto/hblk_crypto.h"
 #include "provided/endianness.h"
+#include "transaction/transaction.h"
 
 #include <time.h>
 
