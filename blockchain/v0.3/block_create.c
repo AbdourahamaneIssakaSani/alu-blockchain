@@ -1,30 +1,25 @@
 #include "blockchain.h"
 
-
 /**
-* block_create - creates a Block structure and initializes it
-*
-* @prev: pointer to the previous Block in the Blockchain
-* @data: pointer to a memory area to duplicate in the Block’s data
-* @data_len: number of bytes to duplicate in data
-*
-* Return: pointer to the allocated Block, or NULL upon failure
-*/
+ * block_create - creates a new block in the sequence
+ * @prev: pointer to previous block
+ * @data: pointer of data to duplicate
+ * @data_len: length of data
+ * Return: pointer to new block or NULL
+ */
 block_t *block_create(block_t const *prev, int8_t const *data,
-
 	uint32_t data_len)
 {
-	block_t *block;
+	block_t *block = calloc(1, sizeof(*block));
+	llist_t *transactions = llist_create(MT_SUPPORT_FALSE);
 
-	block = calloc(1, sizeof(*block));
-	if (block == NULL)
-		return (NULL);
+	if (!block || !transactions)
+		return (free(block), llist_destroy(transactions, 0, NULL), NULL);
+	memcpy(&(block->data.buffer), data, MIN(data_len, BLOCKCHAIN_DATA_MAX));
+	block->data.len = MIN(data_len, BLOCKCHAIN_DATA_MAX);
 	block->info.index = prev->info.index + 1;
-	block->info.difficulty = 0;
 	block->info.timestamp = time(NULL);
-	block->info.nonce = 0;
-	memcpy(block->info.prev_hash, prev->hash, SHA256_DIGEST_LENGTH);
-	memcpy(block->data.buffer, data, data_len);
-	block->data.len = data_len;
+	block->transactions = transactions;
+	memcpy(&(block->info.prev_hash), prev->hash, SHA256_DIGEST_LENGTH);
 	return (block);
 }

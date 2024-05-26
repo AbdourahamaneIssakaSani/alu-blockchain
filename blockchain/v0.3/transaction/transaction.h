@@ -3,6 +3,8 @@
 
 #include "blockchain.h"
 
+#define COINBASE_AMOUNT 50
+
 /**
  * struct transaction_s - Transaction structure
  *

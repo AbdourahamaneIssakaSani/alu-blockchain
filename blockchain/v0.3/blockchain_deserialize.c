@@ -1,15 +1,8 @@
 #include "blockchain.h"
-#include <fcntl.h>
-#include <unistd.h>
-
-
 
 #define CLEAN_UP (free(chain), close(fd))
 #define CLEAN_UP_BLOCKS (free(block), llist_destroy(list, 1, NULL))
 #define CHECK_ENDIAN(x) (endianness ? SWAPENDIAN(x) : (void)0)
-
-llist_t *deserialize_blocks(int fd, uint32_t size, uint8_t endianness);
-
 /**
  * blockchain_deserialize - deserializes blockchain from file
  * @path: path to serialized blockchain file
