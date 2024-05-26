@@ -2,7 +2,6 @@
 #include <string.h>
 
 #include "blockchain.h"
-#include "provided/_transaction_print.c"
 
 void _print_hex_buffer(uint8_t const *buf, size_t len);
 int _transaction_print_loop(transaction_t const *transaction,
@@ -19,7 +18,7 @@ int _transaction_print_brief_loop(transaction_t const *transaction,
  *
  * Return: FOREACH_CONTINUE
  */
-static int _block_print(block_t const *block, unsigned int index,
+int _block_print(block_t const *block, unsigned int index,
 	char const *indent)
 {
 	char indent2[10] = {0};
