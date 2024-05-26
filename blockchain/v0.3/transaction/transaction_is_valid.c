@@ -1,11 +1,11 @@
 #include "transaction.h"
 
 /**
-* match_unspent - finds unspent to match txi
-* @node: utxo
-* @arg: txi struct
-* Return: 0 if continue else 1
-*/
+ * match_unspent - finds unspent to match txi
+ * @node: utxo
+ * @arg: txi struct
+ * Return: 0 if continue else 1
+ */
 int match_unspent(llist_node_t node, void *arg)
 {
 	unspent_tx_out_t *utxo = node;
@@ -17,12 +17,12 @@ int match_unspent(llist_node_t node, void *arg)
 }
 
 /**
-* check_inputs - validates each input
-* @node: txi
-* @idx: index of node
-* @arg: visitor
-* Return: 0 if continue else 1
-*/
+ * check_inputs - validates each input
+ * @node: txi
+ * @idx: index of node
+ * @arg: visitor
+ * Return: 0 if continue else 1
+ */
 int check_inputs(llist_node_t node, unsigned int idx, void *arg)
 {
 	tx_in_t *txi = node;
@@ -52,12 +52,12 @@ int check_inputs(llist_node_t node, unsigned int idx, void *arg)
 }
 
 /**
-* check_outputs - validates each input
-* @node: tx_out_t *
-* @idx: index of node
-* @arg: visitor
-* Return: 0 if continue else 1
-*/
+ * check_outputs - validates each input
+ * @node: tx_out_t *
+ * @idx: index of node
+ * @arg: visitor
+ * Return: 0 if continue else 1
+ */
 int check_outputs(llist_node_t node, unsigned int idx, void *arg)
 {
 	tx_out_t *txo = node;
@@ -69,13 +69,12 @@ int check_outputs(llist_node_t node, unsigned int idx, void *arg)
 }
 
 /**
-* transaction_is_valid - validates tx
-* @transaction: the tx to validate
-* @all_unspent: all unspent txo's
-* Return: 1 if valid else 0
-*/
+ * transaction_is_valid - validates tx
+ * @transaction: the tx to validate
+ * @all_unspent: all unspent txo's
+ * Return: 1 if valid else 0
+ */
 int transaction_is_valid(transaction_t const *transaction,
-
 	llist_t *all_unspent)
 {
 	uint8_t hash_buf[SHA256_DIGEST_LENGTH];
@@ -100,4 +99,3 @@ int transaction_is_valid(transaction_t const *transaction,
 	}
 	return (1);
 }
-
