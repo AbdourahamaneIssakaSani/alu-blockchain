@@ -6,10 +6,21 @@
  */
 void block_mine(block_t *block)
 {
-	if (!block)
+	uint8_t buff[SHA256_DIGEST_LENGTH];
+
+	if ((!block) || (block->info.difficulty == 0))
 		return;
-	block->info.nonce = 0;
-	while (hash_matches_difficulty(block_hash(block, block->hash),
-				       block->info.difficulty) != 1)
+
+	block_hash(block, block->hash);
+
+	for (;;)
+	{
 		block->info.nonce++;
+		block_hash(block, buff);
+		if (hash_matches_difficulty(buff, block->info.difficulty))
+		{
+			memcpy(block->hash, buff, SHA256_DIGEST_LENGTH);
+			break;
+		}
+	}
 }
