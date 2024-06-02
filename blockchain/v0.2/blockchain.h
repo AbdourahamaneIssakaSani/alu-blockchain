@@ -18,6 +18,8 @@
 #define BLOCKCHAIN_DATA_MAX 1024
 #define HBLK_MAGIC "HBLK"
 #define HBLK_VERSION "0.1"
+#define BLOCK_GENERATION_INTERVAL 1
+#define DIFFICULTY_ADJUSTMENT_INTERVAL 5
 
 
 /**
@@ -121,6 +123,9 @@ int block_is_valid(block_t const *block, block_t const *prev_block);
 
 int hash_matches_difficulty(uint8_t const hash[SHA256_DIGEST_LENGTH],
 uint32_t difficulty);
+void block_mine(block_t *block);
+
+uint32_t blockchain_difficulty(blockchain_t const *blockchain);
 
 void _blockchain_destroy(blockchain_t *blockchain);
 void _blockchain_print(blockchain_t const *blockchain);
